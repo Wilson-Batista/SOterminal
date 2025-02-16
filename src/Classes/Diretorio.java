@@ -69,4 +69,28 @@ public class Diretorio {
            JOptionPane.showMessageDialog(null, "Erro methodo RemoverArquivoDiretorio dentro da classe Diretorio" + e.getMessage());
         }
     }
+
+    // Navegacao para pasta parent
+    public Path navegarParentPasta(Path path) {
+        Path parentPasta = path.getParent();
+        System.out.println("PARENT FOLDER: " + parentPasta);
+
+        if(parentPasta == null){
+            System.out.println("Diretorio raiz");
+            return path;
+        }
+        return parentPasta;
+    }
+
+    public Path navegarSubPasta(Path path, String subPastaNome) {
+        Path subPastaPath = path.resolve(subPastaNome);
+
+        if(Files.exists(subPastaPath) && Files.isDirectory(subPastaPath)){
+            System.out.println("SUB PASTA: " + subPastaPath);
+            return subPastaPath;
+        } else {
+            System.out.println("Nao foi possivel encontrar o diretorio " + subPastaNome + " no caminho " + path);
+            return path;
+        }
+    }
 }
