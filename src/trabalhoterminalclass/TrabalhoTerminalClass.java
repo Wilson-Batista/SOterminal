@@ -21,19 +21,34 @@ public class TrabalhoTerminalClass {
      */
     public static void main(String[] args) throws IOException {
         Diretorio dir = new Diretorio();
-        Path pasta = dir.criarDiretorioTemporarioRaiz("Testando");
-        Path pasta2 = dir.criarDiretorio(pasta, "Nova pasta");
-        dir.criarDiretorio(pasta2, "Desktop");
-        dir.criarDiretorio(pasta2, "Documento");
-        dir.criarDiretorio(pasta2, "Pasta3");
-        dir.listarPasta(pasta);
+        Path testando = dir.criarDiretorioTemporarioRaiz("Testando");
+        Path novaPasta = dir.criarDiretorio(testando, "Nova pasta");
+        dir.criarDiretorio(novaPasta, "Desktop");
+        dir.criarDiretorio(novaPasta, "Documento");
+        dir.criarDiretorio(novaPasta, "Pasta3");
+
+        System.out.println("CURRENT PASTA");
+        dir.listarPasta(testando);
+        System.out.println("---------------------------------------------------------------");
+
+        System.out.println("PARENT PASTA TESTE");
+        dir.navegarParentPasta(novaPasta);
+        System.out.println("---------------------------------------------------------------");
+
+
+        System.out.println("SUB-PASTAS TESTE");
+        Path subPasta = dir.navegarSubPasta(testando, "Nova pasta");
+        dir.navegarSubPasta(subPasta, "Desktop");
+        dir.navegarSubPasta(novaPasta, "Documento");
+        System.out.println("---------------------------------------------------------------");
+
         int var = 1;
         Scanner tec = new Scanner(System.in);
         while (var == 1) {
             System.out.println("Digite um numero ");
             var = tec.nextInt();
         }
-        dir.removerDiretorio(pasta);
+        dir.removerDiretorio(testando);
     }
     
 }
